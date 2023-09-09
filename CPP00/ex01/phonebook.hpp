@@ -3,22 +3,29 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <limits>
-#include <cctype>
-add();
-class PhoneBook
+
+class Contact
 {
-    private:
+    private :
         std::string first_name;
         std::string last_name;
-    public:
+        std::string nickname;
+        std::string phone_number;
+        std::string darkest_secret;
+    public :
+        Contact();
+        ~Contact();
+        Contact(std::string first_name, std::string last_name, std::string nickname, std::string phone_number, std::string darkest_secret);
+}
+
+class PhoneBook
+{
+    private :
+        Contact contacts[8];
+        int     nb_contacts;
+    public :
         PhoneBook();
-        PhoneBook(const PhoneBook &phonebook);
         ~PhoneBook();
-        PhoneBook &add=(const PhoneBook &phonebook)
-        {
-            this->first_name = phonebook.first_name;
-            this->last_name = phonebook.last_name;
-            return (*this);
-        }
+        void add_contact();
+        void search_contact();
 }
