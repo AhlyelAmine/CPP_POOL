@@ -12,8 +12,8 @@ class PhoneBook
         Contact contacts[8];
         int contact_count;
     public :
-        PhoneBook(){}
-        ~PhoneBook(){}
+        PhoneBook();
+        ~PhoneBook();
         bool add_contact(PhoneBook &phonebook);
         Contact get_contact(int index){
             return (contacts[index]);
