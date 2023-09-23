@@ -2,39 +2,41 @@
 
 bool PhoneBook::add_contact(PhoneBook &phonebook)
 {
-    Contact *contact = new Contact();
+    Contact contact;
     std::string var;
 
     std::cout << "Enter first name: ";
     std::getline(std::cin, var);
-    contact->set_first_name(var);
+    contact.set_first_name(var);
     if (std::cin.eof())
         return (false);
+
     std::cout << "Enter last name: ";
     std::getline(std::cin, var);
-    contact->set_last_name(var);
+    contact.set_last_name(var);
     if (std::cin.eof())
         return (false);
 
     std::cout << "Enter nick name: ";
     std::getline(std::cin, var);
-    contact->set_nickname(var);
+    contact.set_nickname(var);
     if (std::cin.eof())
         return (false);
 
     std::cout << "Enter phone number: ";
     std::getline(std::cin, var);
-    contact->set_phone_number(var);
+    contact.set_phone_number(var);
     if (std::cin.eof())
         return (false);
 
     std::cout << "Enter darkest secret: ";
     std::setw(10);
     std::getline(std::cin, var);
-    contact->set_darkest_secret(var);
+    contact.set_darkest_secret(var);
     if (std::cin.eof())
         return (false);
-    phonebook.set_contact(*contact);
+
+    phonebook.set_contact(contact);
     phonebook.set_contact_count(phonebook.get_contact_count() + 1);
     std::cout << "Contact added." << std::endl;
     return (true);
@@ -82,11 +84,17 @@ void PhoneBook::search_contact(PhoneBook phonebook)
         std::cout << "Invalid index." << std::endl;
 }
 
+PhoneBook::PhoneBook()
+{
+    contact_count = 0;
+}
+
+PhoneBook::~PhoneBook(){}
+
 int main()
 {
     PhoneBook phonebook;
     std::string command;
-    phonebook.set_contact_count(0);
     while (1)
     {
         std::cout << "Enter a command: ";
@@ -103,7 +111,6 @@ int main()
             phonebook.search_contact(phonebook);
         else
             std::cout << "Invalid command." << std::endl;
-    }
-    
+    }    
     return (0);
 }
