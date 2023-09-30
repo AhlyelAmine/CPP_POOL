@@ -3,7 +3,6 @@
 void    Contact::set_first_name(std::string first_name){
     this->first_name = first_name;
 }
-
 void Contact::set_last_name(std::string last_name){
     this->last_name = last_name;
 }
