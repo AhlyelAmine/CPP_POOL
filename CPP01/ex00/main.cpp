@@ -5,7 +5,7 @@ int main()
 	Zombie alo;
 	Zombie *pop;
 	alo.randomChump("saba");
-	pop = pop->newZombie("brain");
+	pop = pop->newZombie("👺");
 	delete(pop);
 	return (0);
 }
