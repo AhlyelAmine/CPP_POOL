@@ -1,9 +1,16 @@
-#include "Zombie.hpp"
+#include "Fixed.hpp"
 
 int main()
 {
-	Zombie *pop;
-	pop = pop->zombieHorde(15, "saba");
-	delete [] pop;
+	Fixed a;
+	Fixed b(a);
+	Fixed c;
+
+	c = b;
+
+	std::cout << a.getRawBits() << std::endl;
+	std::cout << b.getRawBits() << std::endl;
+	std::cout << c.getRawBits() << std::endl;
+
 	return (0);
 }
