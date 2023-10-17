@@ -2,10 +2,9 @@
 
 int main()
 {
-	Zombie alo;
 	Zombie *pop;
-	alo.randomChump("saba");
-	pop = pop->newZombie("👺");
+	randomChump("saba");
+	pop = newZombie("👺");
 	delete(pop);
 	return (0);
 }
