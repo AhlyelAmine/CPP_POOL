@@ -5,19 +5,22 @@ int main()
 	PhoneBook phonebook;
 	std::string command;
 	Contact contact;
+	int ret;
 
 	while (0x5ABA)
 	{
-		if (!get_value(command, "Enter a command: "))
+		if (!getValue(command, "Enter a command: "))
 			break ;
 		if (command == "EXIT")
 			break;
 		else if (command == "ADD"){
-			if (!phonebook.add_contact(phonebook))
+			if ((ret = phonebook.addContact(phonebook)) && !ret)
 				break;
+			else if (ret == -1)
+				std::cout << "Invalid input." << std::endl;
 		}
 		else if (command == "SEARCH") {
-			if (!phonebook.search_contact(phonebook))
+			if (!phonebook.searchContact(phonebook))
 				break ;
 		}
 		else

@@ -2,69 +2,71 @@
 
 PhoneBook::PhoneBook()
 {
-	contact_count = 0;
+	contactCount = 0;
 }
 
 PhoneBook::~PhoneBook(){}
 
-Contact PhoneBook::get_contact(int index)
+Contact PhoneBook::getContact(int index)
 {
 	return (contacts[index]);
 }
-int PhoneBook::get_contact_count(){
-	return (contact_count);
+int PhoneBook::getContactCount(){
+	return (contactCount);
 }
 
-void PhoneBook::set_contact(Contact contact){
-	contacts[contact_count % 8] = contact;
+void PhoneBook::setContact(Contact contact){
+	contacts[contactCount % 8] = contact;
 }
 
-void PhoneBook::set_contact_count(int contact_count){
-	this->contact_count = contact_count;
+void PhoneBook::setContactCount(int contactCount){
+	this->contactCount = contactCount;
 }
 
-bool    get_value(std::string &value, std::string key)
+int    getValue(std::string &value, std::string key)
 {
     std::cout << key;
-    std::getline(std::cin, value);
+	std::getline(std::cin, value);
     if (std::cin.eof())
-        return (false);
-    return (true);
+        return (0);
+	else if (value.find_first_not_of(' ') == std::string::npos || value.find_first_not_of('\t') == std::string::npos)
+		return (-1);
+    return (1);
 }
 
-bool    init_contact(Contact &contact)
+int    initContact(Contact &contact)
 {
 	std::string var;
-
-	if (!get_value(var, "Enter first name: "))
-		return (false);
-	contact.set_first_name(var);
-	if (!get_value(var, "Enter last name: "))
-		return (false);
-	contact.set_last_name(var);
-	if (!get_value(var, "Enter nick name: "))
-		return (false);
-	contact.set_nickname(var);
-	if (!get_value(var, "Enter phone number: "))
-		return (false);
-	contact.set_phone_number(var);
-	if (!get_value(var, "Enter darkest secret: "))
-		return (false);
-	contact.set_darkest_secret(var);
-	return (true);
+	int			ret;
+	if ((ret = getValue(var, "Enter first name: ")) && ret <= 0)
+		return (ret);
+	contact.setFirstName(var);
+	if ((ret = getValue(var, "Enter last name: ")) && ret <= 0)
+		return (ret);
+	contact.setLastName(var);
+	if ((ret = getValue(var, "Enter nick name: ")) && ret <= 0)
+		return (ret);
+	contact.setNickName(var);
+	if ((ret = getValue(var, "Enter phone number: ")) && ret <= 0)
+		return (ret);
+	contact.setPhoneNumber(var);
+	if ((ret = getValue(var, "Enter darkest secret: ")) && ret <= 0)
+		return (ret);
+	contact.setDarkestSecret(var);
+	return (1);
 }
 
-bool PhoneBook::add_contact(PhoneBook &phonebook)
+int PhoneBook::addContact(PhoneBook &phonebook)
 {
 	std::string var;
 	Contact contact;
-
-	if (!init_contact(contact))
-		return (false);
-	phonebook.set_contact(contact);
-	phonebook.set_contact_count(phonebook.get_contact_count() + 1);
+	int ret;
+	if ((ret = initContact(contact)) && ret <= 0)
+		return (ret);
+	phonebook.setContact(contact);
+	phonebook.setContactCount(phonebook.getContactCount() + 1);
 	std::cout << "Contact added." << std::endl;
-	return (true);
+	return (1);
 }
 
 void    print_template()
@@ -75,13 +77,13 @@ void    print_template()
     std::cout << std::setw(10) << "nickname"  << std::endl;
 }
 
-bool PhoneBook::search_contact(PhoneBook phonebook)
+bool PhoneBook::searchContact(PhoneBook phonebook)
 {
 	std::string s_index;
 	int         index;
 	int         contact_c;
 
-	contact_c = phonebook.get_contact_count() > 8 ? 8 : phonebook.get_contact_count();
+	contact_c = phonebook.getContactCount() > 8 ? 8 : phonebook.getContactCount();
 	print_template();
 	for (int i = 0; i < contact_c; i++)
 		printContactShortDesc(i);
@@ -89,7 +91,7 @@ bool PhoneBook::search_contact(PhoneBook phonebook)
 	std::cin >> index;std::cin.ignore();
 	if (std::cin.eof())
 		return (false);
-	if (index > 0 && index < phonebook.get_contact_count() + 1)
+	if (index > 0 && index < phonebook.getContactCount() + 1)
 		printContactDesc((index - 1) % 8);
 	else
 		std::cout << "Invalid index." << std::endl;
@@ -106,16 +108,16 @@ std::string subtenstr(std::string str)
 void    PhoneBook::printContactShortDesc(int index)
 {
 	std::cout << std::setw(10) << index + 1 << "|";
-	std::cout << std::setw(10) << subtenstr(contacts[index].get_first_name()) << "|";
-	std::cout << std::setw(10) << subtenstr(contacts[index].get_last_name()) << "|";
-	std::cout << std::setw(10) << subtenstr(contacts[index].get_nickname()) << std::endl;
+	std::cout << std::setw(10) << subtenstr(contacts[index].getFirstName()) << "|";
+	std::cout << std::setw(10) << subtenstr(contacts[index].getLastName()) << "|";
+	std::cout << std::setw(10) << subtenstr(contacts[index].getNickName()) << std::endl;
 }
 
 void    PhoneBook::printContactDesc(int index)
 {
-	std::cout << "First name: " << contacts[index].get_first_name() << std::endl;
-	std::cout << "last name: " << contacts[index].get_last_name() << std::endl;
-	std::cout << "nickname: " << contacts[index].get_nickname() << std::endl;
-	std::cout << "Phone Number: " << contacts[index].get_phone_number() << std::endl;
-	std::cout << "Darkest Secret: " << contacts[index].get_darkest_secret() << std::endl;
+	std::cout << "First name: " << contacts[index].getFirstName() << std::endl;
+	std::cout << "last name: " << contacts[index].getLastName() << std::endl;
+	std::cout << "nickname: " << contacts[index].getNickName() << std::endl;
+	std::cout << "Phone Number: " << contacts[index].getPhoneNumber() << std::endl;
+	std::cout << "Darkest Secret: " << contacts[index].getDarkestSecret() << std::endl;
 }
