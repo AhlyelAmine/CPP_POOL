@@ -5,7 +5,7 @@
 #include <iomanip>
 #include <string>
 
-int    getValue(std::string &value, std::string key);
+bool    getValue(std::string &value, std::string key, int &ret);
 
 class PhoneBook
 {
@@ -19,7 +19,7 @@ class PhoneBook
 		Contact			getContact(int index);
 		void			setContact(Contact contact);
 		void			setContactCount(int contactCount);
-		int			addContact(PhoneBook &phonebook);
+		bool			addContact(PhoneBook &phonebook, int &ret);
 		bool			searchContact(PhoneBook phonebook);
 		void			printContactShortDesc(int index);
 		void			printContactDesc(int index);

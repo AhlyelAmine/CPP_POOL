@@ -23,50 +23,50 @@ void PhoneBook::setContactCount(int contactCount){
 	this->contactCount = contactCount;
 }
 
-int    getValue(std::string &value, std::string key)
+bool    getValue(std::string &value, std::string key, int &ret)
 {
     std::cout << key;
 	std::getline(std::cin, value);
     if (std::cin.eof())
-        return (0);
-	else if (value.find_first_not_of(' ') == std::string::npos || value.find_first_not_of('\t') == std::string::npos)
-		return (-1);
-    return (1);
+        return (ret = 0, false);
+	else if (value.find_first_not_of("\t \r\v\f\n") == std::string::npos)
+		return (ret = -1, false);
+    return (true);
 }
 
-int    initContact(Contact &contact)
+bool    initContact(Contact &contact, int &ret)
 {
 	std::string var;
-	int			ret;
-	if ((ret = getValue(var, "Enter first name: ")) && ret <= 0)
-		return (ret);
+
+	if (!getValue(var, "Enter first name: ", ret))
+		return (false);
 	contact.setFirstName(var);
-	if ((ret = getValue(var, "Enter last name: ")) && ret <= 0)
-		return (ret);
+	if (!getValue(var, "Enter last name: ", ret))
+		return (false);
 	contact.setLastName(var);
-	if ((ret = getValue(var, "Enter nick name: ")) && ret <= 0)
-		return (ret);
+	if (!getValue(var, "Enter nick name: ", ret))
+		return (false);
 	contact.setNickName(var);
-	if ((ret = getValue(var, "Enter phone number: ")) && ret <= 0)
-		return (ret);
+	if (!getValue(var, "Enter phone number: ", ret))
+		return (false);
 	contact.setPhoneNumber(var);
-	if ((ret = getValue(var, "Enter darkest secret: ")) && ret <= 0)
-		return (ret);
+	if (!getValue(var, "Enter darkest secret: ", ret))
+		return (false);
 	contact.setDarkestSecret(var);
-	return (1);
+	return (true);
 }
 
-int PhoneBook::addContact(PhoneBook &phonebook)
+bool PhoneBook::addContact(PhoneBook &phonebook, int &ret)
 {
 	std::string var;
 	Contact contact;
-	int ret;
-	if ((ret = initContact(contact)) && ret <= 0)
-		return (ret);
+	
+	if (!initContact(contact, ret))
+		return (false);
 	phonebook.setContact(contact);
 	phonebook.setContactCount(phonebook.getContactCount() + 1);
 	std::cout << "Contact added." << std::endl;
-	return (1);
+	return (true);
 }
 
 void    print_template()
@@ -88,9 +88,10 @@ bool PhoneBook::searchContact(PhoneBook phonebook)
 	for (int i = 0; i < contact_c; i++)
 		printContactShortDesc(i);
 	std::cout << "Enter an index: ";
-	std::cin >> index;std::cin.ignore();
+	std::getline(std::cin, s_index);
 	if (std::cin.eof())
 		return (false);
+	index = atoi(s_index.c_str());
 	if (index > 0 && index < phonebook.getContactCount() + 1)
 		printContactDesc((index - 1) % 8);
 	else
