@@ -2,21 +2,21 @@
 
 PhoneBook::PhoneBook()
 {
-	contactCount = 0;
+	this->contactCount = 0;
 }
 
 PhoneBook::~PhoneBook(){}
 
-Contact PhoneBook::getContact(int index)
+Contact PhoneBook::getContact(int index) const
 {
-	return (contacts[index]);
+	return (this->contacts[index]);
 }
-int PhoneBook::getContactCount(){
-	return (contactCount);
+int PhoneBook::getContactCount() const{
+	return (this->contactCount);
 }
 
 void PhoneBook::setContact(Contact contact){
-	contacts[contactCount % 8] = contact;
+	this->contacts[this->contactCount % 8] = contact;
 }
 
 void PhoneBook::setContactCount(int contactCount){
@@ -77,7 +77,7 @@ void    print_template()
     std::cout << std::setw(10) << "nickname"  << std::endl;
 }
 
-bool PhoneBook::searchContact(PhoneBook phonebook)
+bool PhoneBook::searchContact(PhoneBook phonebook) const
 {
 	std::string s_index;
 	int         index;
@@ -106,7 +106,7 @@ std::string subtenstr(std::string str)
     return (str);
 }
 
-void    PhoneBook::printContactShortDesc(int index)
+void    PhoneBook::printContactShortDesc(int index) const
 {
 	std::cout << std::setw(10) << index + 1 << "|";
 	std::cout << std::setw(10) << subtenstr(contacts[index].getFirstName()) << "|";
@@ -114,7 +114,7 @@ void    PhoneBook::printContactShortDesc(int index)
 	std::cout << std::setw(10) << subtenstr(contacts[index].getNickName()) << std::endl;
 }
 
-void    PhoneBook::printContactDesc(int index)
+void    PhoneBook::printContactDesc(int index) const
 {
 	std::cout << "First name: " << contacts[index].getFirstName() << std::endl;
 	std::cout << "last name: " << contacts[index].getLastName() << std::endl;
