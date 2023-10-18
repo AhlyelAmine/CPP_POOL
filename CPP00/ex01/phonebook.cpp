@@ -1,30 +1,27 @@
 #include "phonebook.hpp"
 
-PhoneBook::PhoneBook()
-{
+PhoneBook::PhoneBook() {
 	this->contactCount = 0;
 }
 
 PhoneBook::~PhoneBook(){}
 
-Contact PhoneBook::getContact(int index) const
-{
+Contact PhoneBook::getContact(int index) const {
 	return (this->contacts[index]);
 }
-int PhoneBook::getContactCount() const{
+int PhoneBook::getContactCount() const {
 	return (this->contactCount);
 }
 
-void PhoneBook::setContact(Contact contact){
+void PhoneBook::setContact(Contact contact) {
 	this->contacts[this->contactCount % 8] = contact;
 }
 
-void PhoneBook::setContactCount(int contactCount){
+void PhoneBook::setContactCount(int contactCount) {
 	this->contactCount = contactCount;
 }
 
-bool    getValue(std::string &value, std::string key, int &ret)
-{
+bool    getValue(std::string &value, std::string key, int &ret) {
     std::cout << key;
 	std::getline(std::cin, value);
     if (std::cin.eof())
@@ -34,8 +31,7 @@ bool    getValue(std::string &value, std::string key, int &ret)
     return (true);
 }
 
-bool    initContact(Contact &contact, int &ret)
-{
+bool    initContact(Contact &contact, int &ret) {
 	std::string var;
 
 	if (!getValue(var, "Enter first name: ", ret))
@@ -56,8 +52,7 @@ bool    initContact(Contact &contact, int &ret)
 	return (true);
 }
 
-bool PhoneBook::addContact(PhoneBook &phonebook, int &ret)
-{
+bool PhoneBook::addContact(PhoneBook &phonebook, int &ret) {
 	std::string var;
 	Contact contact;
 	
@@ -69,16 +64,14 @@ bool PhoneBook::addContact(PhoneBook &phonebook, int &ret)
 	return (true);
 }
 
-void    print_template()
-{
+void    print_template() {
     std::cout << std::setw(10) << "index" << "|";
     std::cout << std::setw(10) << "first name"  << "|";
     std::cout << std::setw(10) << "last name"  << "|";
     std::cout << std::setw(10) << "nickname"  << std::endl;
 }
 
-bool PhoneBook::searchContact(PhoneBook phonebook) const
-{
+bool PhoneBook::searchContact(PhoneBook phonebook) const {
 	std::string s_index;
 	int         index;
 	int         contact_c;
@@ -99,23 +92,20 @@ bool PhoneBook::searchContact(PhoneBook phonebook) const
 	return (true);
 }
 
-std::string subtenstr(std::string str)
-{
+std::string subtenstr(std::string str) {
     if (str.length() > 10)
         return (str.substr(0, 9) + ".");
     return (str);
 }
 
-void    PhoneBook::printContactShortDesc(int index) const
-{
+void    PhoneBook::printContactShortDesc(int index) const {
 	std::cout << std::setw(10) << index + 1 << "|";
 	std::cout << std::setw(10) << subtenstr(contacts[index].getFirstName()) << "|";
 	std::cout << std::setw(10) << subtenstr(contacts[index].getLastName()) << "|";
 	std::cout << std::setw(10) << subtenstr(contacts[index].getNickName()) << std::endl;
 }
 
-void    PhoneBook::printContactDesc(int index) const
-{
+void    PhoneBook::printContactDesc(int index) const {
 	std::cout << "First name: " << contacts[index].getFirstName() << std::endl;
 	std::cout << "last name: " << contacts[index].getLastName() << std::endl;
 	std::cout << "nickname: " << contacts[index].getNickName() << std::endl;
