@@ -1,6 +1,7 @@
 #include "Harl.hpp"
 Harl::Harl(){}
 Harl::~Harl(){}
+
 void Harl::debug(void)
 {
     std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger. I really do!" << std::endl;
@@ -23,8 +24,8 @@ void Harl::error(void)
 
 void Harl::complain(std::string type)
 {
-    fnc_ptr func[] = {&Harl::warning, &Harl::debug, &Harl::error, &Harl::info};
-    std::string types[] = {"WARNING", "DEBUG", "ERROR", "INFO"};
+    std::string types[] = {"DEBUG", "INFO", "WARNING",  "ERROR"};
+    fnc_ptr func[] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
     for (int i = 0; i < 4; i++) {
         if (type == types[i]) {
             (this->*func[i])();

@@ -11,7 +11,7 @@ class Harl
     public :
         Harl();
         ~Harl();
-        void complain( std::string level);
+        void complain(std::string level);
 };
 
 typedef void (Harl::*fnc_ptr) ( void );

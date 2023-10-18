@@ -5,12 +5,9 @@ int main(int ac, char **av)
     Harl harl;
     std::string input;
 
-    while (0x5ABA) {
-        std::cout << "Enter an input : ";
-        std::cin >> input;
-        if (std::cin.eof() || input == "EXIT")
-            return (0);
-        harl.log(input);
+    if (ac == 2) {
+        input = av[1];
+        harl.complainBook(input);
     }
     return (0);
 }

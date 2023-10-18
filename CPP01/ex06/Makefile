@@ -1,4 +1,4 @@
-CC = c++
+CC = c++ -std=c++98
 CFLAGS = 
 NAME = harlFilter
 SRCS =  main.cpp Harl.cpp
