@@ -2,44 +2,22 @@
 #include "HumanB.hpp"
 #include "Weapon.hpp"
 
-// int main()
-// {
-//     {
-//         Weapon club = Weapon("🔪");
-//         std::cout << "weapon : " << &club << std::endl;
-//         HumanA bob("Bob", club);
-//         bob.attack();
-//         club.setType("⚔️");
-//         bob.attack();
-//     }
-//     {
-//         Weapon club = Weapon("🔪");
-//         HumanB jim("Jim");
-//         // jim.setWeapon(club);
-//         jim.attack();
-//         club.setType("⚔️");
-//         jim.attack();
-//     }
-//     return 0;
-// }
-
 int main()
 {
     {
-        Weapon club = Weapon("crude spiked club");
-
-        HumanA bob("Bob", club);
+        Weapon club = Weapon("🔪");
+        HumanA bob("saba", club);
         bob.attack();
-        club.setType("some other type of club");
+        club.setType("🗡");
         bob.attack();
     }
     {
-        Weapon club = Weapon("crude spiked club");
+        Weapon club = Weapon("🔪");
 
-        HumanB jim("Jim");
+        HumanB jim("lucifer");
         jim.setWeapon(club);
         jim.attack();
-        club.setType("some other type of club");
+        club.setType("📎");
         jim.attack();
     }
 

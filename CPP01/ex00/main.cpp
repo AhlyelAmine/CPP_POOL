@@ -2,9 +2,9 @@
 
 int main()
 {
-	Zombie *pop;
+	Zombie *lucifer;
 	randomChump("saba");
-	pop = newZombie("👺");
-	delete(pop);
+	lucifer = newZombie("👺");
+	delete(lucifer);
 	return (0);
 }

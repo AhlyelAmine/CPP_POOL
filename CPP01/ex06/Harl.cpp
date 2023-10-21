@@ -57,4 +57,3 @@ void Harl::complainBook(std::string type)
             break ;
     }
 }
-

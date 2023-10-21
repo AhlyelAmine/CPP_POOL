@@ -1,5 +1,5 @@
-CC = c++ -std=c++98
-CFLAGS = 
+CC = c++
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = harlFilter
 SRCS =  main.cpp Harl.cpp
 OBJS = $(SRCS:.cpp=.o)
