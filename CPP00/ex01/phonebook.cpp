@@ -34,19 +34,21 @@ bool    getValue(std::string &value, std::string key, int &ret) {
 bool    initContact(Contact &contact, int &ret) {
 	std::string var;
 
-	if (!getValue(var, "Enter first name: ", ret))
-		return (false);
+	while (!getValue(var, "Enter first name: ", ret) && ret != 0)
+		std::cout << "Invalid input." << std::endl;
 	contact.setFirstName(var);
-	if (!getValue(var, "Enter last name: ", ret))
-		return (false);
+	while (ret != 0 && !getValue(var, "Enter last name: ", ret) && ret != 0)
+		std::cout << "Invalid input." << std::endl;
 	contact.setLastName(var);
-	if (!getValue(var, "Enter nick name: ", ret))
-		return (false);
+	while (ret != 0 && !getValue(var, "Enter nick name: ", ret) && ret != 0)
+		std::cout << "Invalid input." << std::endl;
 	contact.setNickName(var);
-	if (!getValue(var, "Enter phone number: ", ret))
-		return (false);
+	while (ret != 0 && !getValue(var, "Enter phone number: ", ret) && ret != 0)
+		std::cout << "Invalid input." << std::endl;
 	contact.setPhoneNumber(var);
-	if (!getValue(var, "Enter darkest secret: ", ret))
+	while (ret != 0 && !getValue(var, "Enter darkest secret: ", ret) && ret != 0)
+		std::cout << "Invalid input." << std::endl;
+	if (ret == 0)
 		return (false);
 	contact.setDarkestSecret(var);
 	return (true);
@@ -72,7 +74,6 @@ void    print_template() {
 }
 
 bool PhoneBook::searchContact(PhoneBook phonebook) const {
-	std::string s_index;
 	int         index;
 	int         contact_c;
 
@@ -80,11 +81,20 @@ bool PhoneBook::searchContact(PhoneBook phonebook) const {
 	print_template();
 	for (int i = 0; i < contact_c; i++)
 		printContactShortDesc(i);
-	std::cout << "Enter an index: ";
-	std::getline(std::cin, s_index);
-	if (std::cin.eof())
-		return (false);
-	index = atoi(s_index.c_str());
+	while (true)
+	{
+		std::cout << "Enter an index: ";
+		std::cin >> index;
+		if (std::cin.eof())
+			return (false);
+		if (std::cin.fail())
+		{
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+		else
+			break ;
+	}
 	if (index > 0 && index < phonebook.getContactCount() + 1)
 		printContactDesc((index - 1) % 8);
 	else

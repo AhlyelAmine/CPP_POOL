@@ -5,10 +5,10 @@ int main()
 	PhoneBook phonebook;
 	std::string command;
 	Contact contact;
-	int ret;
 
 	while (0x5ABA)
 	{
+		int ret = 1;
 		if (!getValue(command, "Enter a command: ", ret) && !ret)
 			break ;
 		if (command == "EXIT")
@@ -24,6 +24,9 @@ int main()
 		else if (command == "SEARCH") {
 			if (!phonebook.searchContact(phonebook))
 				break ;
+			else
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
 		}
 		else
 			std::cout << "Invalid command." << std::endl;
