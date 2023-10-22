@@ -40,12 +40,12 @@ void Harl::complainBook(std::string type)
             }
             break ;
         case 1:
-            for (int i = 2; i < 4; i++) {
+            for (int i = 1; i < 4; i++) {
                 (this->*func[i])();
             }
             break ;
         case 2:
-            for (int i = 3; i < 4; i++) {
+            for (int i = 2; i < 4; i++) {
                 (this->*func[i])();
             }
             break ;
