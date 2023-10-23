@@ -1,8 +1,16 @@
-#include "HumanB.hpp"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aahlyel <aahlyel@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 04:00:14 by aahlyel           #+#    #+#             */
+/*   Updated: 2023/10/23 04:00:15 by aahlyel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-HumanB::HumanB(){
-    this->weapon = NULL;
-}
+#include "HumanB.hpp"
 
 HumanB::HumanB(std::string name):name(name){
     this->weapon = NULL;
