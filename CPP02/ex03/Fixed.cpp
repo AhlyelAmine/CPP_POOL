@@ -1,6 +1,7 @@
 #include "Fixed.hpp"
 
 Fixed::Fixed() : value(0) {}
+
 Fixed::Fixed(const int value) : value(value << this->bits) {}
 
 Fixed::Fixed(const float value) : value(roundf(value * (1 << this->bits))) {}
