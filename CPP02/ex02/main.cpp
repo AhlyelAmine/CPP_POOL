@@ -1,11 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aahlyel <aahlyel@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 09:36:16 by aahlyel           #+#    #+#             */
+/*   Updated: 2023/10/23 09:36:18 by aahlyel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 #include <iostream>
-
-std::ostream& operator<<(std::ostream& o,const Fixed &rhs)
-{
-    o << rhs.toFloat();
-    return (o);
-}
 
 int main( void ) {
     Fixed a;

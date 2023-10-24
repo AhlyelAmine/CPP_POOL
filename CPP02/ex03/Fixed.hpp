@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aahlyel <aahlyel@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 09:35:59 by aahlyel           #+#    #+#             */
+/*   Updated: 2023/10/23 09:36:00 by aahlyel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 #include <iostream>
 #include <cmath>
@@ -38,3 +50,4 @@ class Fixed
 		Fixed operator--(int);
 };
 
+std::ostream &operator<<(std::ostream &o, const Fixed &fixed);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aahlyel <aahlyel@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 09:36:19 by aahlyel           #+#    #+#             */
+/*   Updated: 2023/10/23 09:36:20 by aahlyel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 
 Fixed::Fixed() : value(0)
@@ -53,4 +65,10 @@ float Fixed::toFloat(void) const
 int Fixed::toInt(void) const
 {
 	return (this->value >> this->bits);
+}
+
+std::ostream& operator<<(std::ostream &o, const Fixed &fixed)
+{
+	o << fixed.toFloat();
+	return (o);
 }
