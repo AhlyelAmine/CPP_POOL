@@ -1,8 +1,8 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string _name) : _name(_name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
+ClapTrap::ClapTrap(std::string name) : name(name), hitPoints(10), energyPoints(10), attackDamage(0)
 {
-	std::cout << "ClapTrap Constructor called for " << _name  << std::endl;
+	std::cout << "ClapTrap Constructor called for " << name  << std::endl;
 }
 
 ClapTrap::~ClapTrap()
@@ -19,27 +19,27 @@ ClapTrap::ClapTrap(const ClapTrap& clapTrap)
 ClapTrap& ClapTrap::operator=(const ClapTrap& clapTrap)
 {
 	std::cout << "ClapTrap assignement operator called" << std::endl;
-	this->_name = clapTrap._name;
-	this->_hitPoints = clapTrap._hitPoints;
-	this->_energyPoints = clapTrap._energyPoints;
-	this->_attackDamage = clapTrap._attackDamage;
+	this->name = clapTrap.name;
+	this->hitPoints = clapTrap.hitPoints;
+	this->energyPoints = clapTrap.energyPoints;
+	this->attackDamage = clapTrap.attackDamage;
 	return (*this);
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	if (_hitPoints >= amount) 
-		_hitPoints -= amount;
+	if (hitPoints >= amount) 
+		hitPoints -= amount;
 	else
-		_hitPoints -= _hitPoints;
+		hitPoints -= hitPoints;
 	std::cout << "ClapTrap damaged " << amount << " hit points" << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	if (_energyPoints > 0) {
-		_energyPoints -= 1;
-		_hitPoints += amount;
+	if (energyPoints > 0) {
+		energyPoints -= 1;
+		hitPoints += amount;
 	}
 	else
 		std::cout << "no energy points left" << std::endl;
@@ -47,12 +47,12 @@ void ClapTrap::beRepaired(unsigned int amount)
 
 void ClapTrap::attack(const std::string& target)
 {
-	if (_energyPoints > 0 && _hitPoints > 0) {
-		_energyPoints -= 1;
-		std::cout << "ClapTrap " << _name << " attacks "<< target << ", causing "<< _attackDamage <<" points of damage!" << std::endl;
+	if (energyPoints > 0 && hitPoints > 0) {
+		energyPoints -= 1;
+		std::cout << "ClapTrap " << name << " attacks "<< target << ", causing "<< attackDamage <<" points of damage!" << std::endl;
 	}
-	else if (_hitPoints <= 0)
+	else if (hitPoints <= 0)
 		std::cout << "ScavTrap no hitPoints" << std::endl;
-	else if (_energyPoints <= 0)
+	else if (energyPoints <= 0)
 		std::cout << "ScavTrap no energy points left" << std::endl;
 }

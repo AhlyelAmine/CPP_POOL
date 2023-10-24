@@ -6,7 +6,7 @@ class FragTrap : public virtual ClapTrap
     protected:
     public:
         FragTrap(){};
-        FragTrap(std::string _name);
+        FragTrap(std::string name);
         ~FragTrap();
         void highFivesGuys();
 };

@@ -1,11 +1,11 @@
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap(std::string _name) : ClapTrap(_name), FragTrap(_name), ScavTrap(_name), _name(_name)
+DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name), FragTrap(name), ScavTrap(name), name(name)
 {
-    ClapTrap::_name += "_clap_name";
-    FragTrap::_hitPoints = 100;
-    FragTrap::_attackDamage = 30;
-    ScavTrap::_energyPoints = 50;
+    ClapTrap::name += "_clapname";
+    FragTrap::hitPoints = 100;
+    FragTrap::attackDamage = 30;
+    ScavTrap::energyPoints = 50;
     std::cout << "DiamondTrap constructor called" << std::endl;
 }
 
@@ -16,5 +16,5 @@ DiamondTrap::~DiamondTrap()
 
 void DiamondTrap::whoAmI()
 {
-    std::cout << "Diamond trap " << _name << " father of clapTrap " << this->ClapTrap::_name << std::endl;
+    std::cout << "Diamond trap " << name << " father of clapTrap " << this->ClapTrap::name << std::endl;
 }
