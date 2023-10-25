@@ -8,8 +8,8 @@ class ClapTrap
         unsigned int hitPoints;
         unsigned int energyPoints;
         unsigned int attackDamage;
-        ClapTrap();
     public:
+        ClapTrap();
         ClapTrap(std::string name);
         ClapTrap(const ClapTrap& clapTrap);
         ClapTrap& operator=(const ClapTrap& clapTrap);

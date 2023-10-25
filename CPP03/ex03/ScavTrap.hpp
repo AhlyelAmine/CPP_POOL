@@ -3,11 +3,12 @@
 
 class ScavTrap : public virtual ClapTrap
 {
-    protected:
     public:
-        ScavTrap(){};
+        ScavTrap();
+        ScavTrap(const ScavTrap& scavTrap);
+        ScavTrap& operator=(const ScavTrap& scavTrap);
         ScavTrap(std::string name);
         ~ScavTrap();
         void guardGate();
         void attack(const std::string& target);
-};    
+};

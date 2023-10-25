@@ -3,9 +3,10 @@
 
 class FragTrap : public virtual ClapTrap
 {
-    protected:
     public:
-        FragTrap(){};
+        FragTrap();
+        FragTrap(const FragTrap& fragTrap);
+        FragTrap& operator=(const FragTrap& fragTrap);
         FragTrap(std::string name);
         ~FragTrap();
         void highFivesGuys();

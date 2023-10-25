@@ -3,9 +3,10 @@
 
 class ScavTrap : public ClapTrap
 {
-    private:
-        ScavTrap();
     public:
+        ScavTrap();
+        ScavTrap(const ScavTrap& scavTrap);
+        ScavTrap& operator=(const ScavTrap& scavTrap);
         ScavTrap(std::string name);
         ~ScavTrap();
         void guardGate();
