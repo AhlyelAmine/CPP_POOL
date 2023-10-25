@@ -5,9 +5,11 @@ int main()
 {
 	ScavTrap a("saba");
 	a.guardGate();
-	FragTrap b("saabaa");
-	b.attack("saba");
-	a.attack("saabaa");
+	a.attack("alien");
+	FragTrap b("saba");
+	b.attack("alien");
 	b.highFivesGuys();
+	b.takeDamage(10);
+	b.beRepaired(100);
 	return (0);
 }

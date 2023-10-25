@@ -9,7 +9,7 @@ class ClapTrap
         unsigned int energyPoints;
         unsigned int attackDamage;
     public:
-        ClapTrap(){std::cout << "wtf i am doing here\n";};
+        ClapTrap();
         ClapTrap(std::string name);
         ClapTrap(const ClapTrap& clapTrap);
         ClapTrap& operator=(const ClapTrap& clapTrap);

@@ -6,19 +6,8 @@ int main()
 	ClapTrap b("pop");
 	ClapTrap c(a);
 	a.attack("d");
-	a.attack("d");
-	a.attack("d");
-	a.attack("d");
-	a.attack("d");
-	a.attack("d");
-	a.attack("d");
-	a.attack("d");
-	a.attack("d");
-	a.attack("d");
-	a.attack("d");
-	a.attack("d");
 	a.takeDamage(15);
-	a.attack("d");
-	a.attack("d");
+	a.takeDamage(150);
+	a.beRepaired(100);
 	return (0);
 }

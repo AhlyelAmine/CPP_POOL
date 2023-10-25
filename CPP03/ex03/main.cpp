@@ -7,7 +7,11 @@ int main()
 {
 	DiamondTrap a("saba");
 	a.whoAmI();
-	a.attack("alo");
+	a.attack("alien");
+	a.guardGate();
+	a.highFivesGuys();
+	a.takeDamage(100);
+	a.beRepaired(100);
 	std::cout << a.getName() << std::endl;
 	return (0);
 }
