@@ -2,21 +2,21 @@
 
 Animal::Animal()
 {
-    std::cout << "Animal default Constractor called\n";
+    std::cout << "Animal Default Constructor called\n";
 }
 
 Animal::Animal(const std::string type) : type(type)
 {
-    std::cout << "Animal Constractor called\n";
+    std::cout << "Animal Constructor called\n";
 }
 Animal::~Animal()
 {
-    std::cout << "Animal destractor called\n";
+    std::cout << "Animal destructor called\n";
 }
 
 Animal::Animal(const Animal& animal)
 {
-    std::cout << "Animal copy Constractor called\n";
+    std::cout << "Animal copy Constructor called\n";
     *this = animal;
 }
 Animal& Animal::operator=(const Animal& animal)
