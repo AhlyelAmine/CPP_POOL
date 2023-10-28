@@ -1,20 +1,12 @@
 #include "WrongCat.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
-#include "Animal.hpp"
-#include "WrongAnimal.hpp"
 
 int main()
 {
-    Animal *animals[4];
-
-    animals[0] = new Dog();
-    animals[1] = new Dog();
-    animals[2] = new Cat();
-    animals[3] = new Cat();
+    Animal *animals[4] = {new Dog(), new Dog(), new Cat(), new Cat()};
     for (int i = 0; i < 4; i++)
-    {
         animals[i]->makeSound();
+    for (int i = 0; i < 4; i++)
         delete animals[i];
-    }
 }

@@ -22,6 +22,8 @@ WrongAnimal::WrongAnimal(const WrongAnimal& wrongAnimal)
 WrongAnimal& WrongAnimal::operator=(const WrongAnimal& wrongAnimal)
 {
     std::cout << "WrongAnimal assignation operator called\n";
+    if (this == &wrongAnimal)
+        return (*this);
     return (*this);
 }
 

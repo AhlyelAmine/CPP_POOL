@@ -2,25 +2,28 @@
 
 WrongAnimal::WrongAnimal()
 {
-    std::cout << "WrongAnimal default Constractor called\n";
+    std::cout << "WrongAnimal default Constructor called\n";
 }
 
 WrongAnimal::WrongAnimal(const std::string type) : type(type)
 {
-    std::cout << "WrongAnimal Constractor called\n";
+    std::cout << "WrongAnimal Constructor called\n";
 }
 WrongAnimal::~WrongAnimal()
 {
-    std::cout << "WrongAnimal destractor called\n";
+    std::cout << "WrongAnimal destructor called\n";
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal& wrongAnimal)
 {
-    std::cout << "WrongAnimal copy Constractor called\n";
+    std::cout << "WrongAnimal copy Constructor called\n";
     *this = wrongAnimal;
 }
 WrongAnimal& WrongAnimal::operator=(const WrongAnimal& wrongAnimal)
 {
+    std::cout << "WrongAnimal assignation operator called\n";
+    if (this == &wrongAnimal)
+        return (*this);
     return (*this);
 }
 

@@ -19,8 +19,10 @@ Animal::Animal(const Animal& animal)
     std::cout << "Animal copy Constructor called\n";
     *this = animal;
 }
+
 Animal& Animal::operator=(const Animal& animal)
 {
+    this->type = animal.type;
     return (*this);
 }
 

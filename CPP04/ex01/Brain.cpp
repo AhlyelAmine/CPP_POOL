@@ -4,6 +4,7 @@ Brain::Brain()
 {
     std::cout << "Brain constructor called\n";
 }
+
 Brain::Brain(const Brain& brain)
 {
     *this = brain;

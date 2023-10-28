@@ -1,7 +1,7 @@
 CC = c++
-CFLAGS = #-Wall -Wextra -Werror -std=c++98 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = animal 
-SRCS = Animal.cpp Cat.cpp Dog.cpp main.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
+SRCS = AMateria.cpp ICharacter.cpp IMateriaSource.cpp  Character.cpp main.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
@@ -9,7 +9,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp Dog.hpp Animal.hpp Cat.hpp WrongAnimal.hpp WrongCat.hpp Brain.hpp
+%.o: %.cpp IMateriaSource.hpp ICharacter.hpp AMateria.hpp Character.hpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
