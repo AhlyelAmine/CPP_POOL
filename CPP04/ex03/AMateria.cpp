@@ -1,16 +1,30 @@
-#pragma once
-#include "ICharacter.hpp"
+#include "AMateria.hpp"
 
-class AMateria
+AMateria::AMateria() {}
+
+AMateria::~AMateria() {}
+
+AMateria::AMateria(const AMateria& aMateria)
 {
-    protected:
-        std::string type;
-    public:
-    AMateria();
-    AMateria(std::string const & type);
-    AMateria& operator=(const AMateria& materia);
-    virtual ~AMateria(){};
-    std::string const & getType() const;
-    virtual AMateria* clone() const = 0;
-    virtual void use(ICharacter& target);
-};
+    *this = aMateria;
+}
+
+AMateria& AMateria::operator=(const AMateria& aMateria)
+{
+    if (this == &aMateria)
+        return (*this);
+    this->type = aMateria.type;
+    return (*this);
+}
+
+AMateria::AMateria(std::string const & type) : type(type) {}
+
+std::string const & AMateria::getType() const
+{
+    return (this->type);
+}
+
+void AMateria::use(ICharacter& target)
+{
+    std::cout << "Default use function for "<< target.getName() << "\n";
+}

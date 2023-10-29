@@ -4,19 +4,11 @@
 class Ice : public AMateria
 {
     private:
-        /* data */
     public:
         Ice();
-        AMateria* clone() const {return new Ice(*this);};
+        Ice(const Ice& ice);
+        Ice& operator=(const Ice& ice);
         ~Ice();
+        AMateria* clone() const;
+        void use(ICharacter& target);
 };
-
-Ice::Ice() : AMateria("ice")
-{
-    std::cout << "Ice constructor called" << std::endl;
-}
-
-Ice::~Ice()
-{
-    std::cout << "Ice destructor called" << std::endl;
-}

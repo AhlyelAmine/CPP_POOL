@@ -1,19 +1,15 @@
 #pragma once
+#include "IMateriaSource.hpp"
 #include <iostream>
 
-class MateriaSource
+class MateriaSource : public IMateriaSource
 {
-private:
-    /* data */
-public:
-    MateriaSource(/* args */);
-    ~MateriaSource();
+    private:
+        AMateria *slot[4];
+    public:
+        void learnMateria(AMateria*);
+        AMateria* createMateria(std::string const & type);
+        MateriaSource();
+        ~MateriaSource();
 };
 
-MateriaSource::MateriaSource(/* args */)
-{
-}
-
-MateriaSource::~MateriaSource()
-{
-}

@@ -5,9 +5,13 @@
 #include "MateriaSource.hpp"
 #include "Character.hpp"
 
-
+void fun()
+{
+    system("leaks animal");
+}
 int main()
 {
+    atexit(fun);
     IMateriaSource* src = new MateriaSource();
     src->learnMateria(new Ice());
     src->learnMateria(new Cure());

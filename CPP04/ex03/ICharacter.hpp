@@ -1,14 +1,12 @@
 #pragma once
-#include <iostream>
 #include "AMateria.hpp"
+#include <iostream>
 
+class AMateria;
 class ICharacter
 {
     public:
-        ICharacter();
-        ICharacter(const ICharacter& character);
-        ICharacter& operator=(const ICharacter& character);
-        virtual ~ICharacter() {}
+        virtual ~ICharacter();
         virtual std::string const & getName() const = 0;
         virtual void equip(AMateria* m) = 0;
         virtual void unequip(int idx) = 0;
