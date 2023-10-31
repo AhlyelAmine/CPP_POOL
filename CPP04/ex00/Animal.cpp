@@ -22,6 +22,9 @@ Animal::Animal(const Animal& animal)
 
 Animal& Animal::operator=(const Animal& animal)
 {
+    std::cout << "Animal assignation operator called\n";
+    if (this == &animal)
+        return (*this);
     this->type = animal.type;
     return (*this);
 }

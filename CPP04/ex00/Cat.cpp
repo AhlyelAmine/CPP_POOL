@@ -14,6 +14,8 @@ Cat::Cat(const Cat& cat) : Animal(cat.type)
 Cat& Cat::operator=(const Cat& cat)
 {
     std::cout << "Cat assignation operator called\n";
+    if (this == &cat)
+        return (*this);
     this->type = cat.type;
     return (*this);
 }

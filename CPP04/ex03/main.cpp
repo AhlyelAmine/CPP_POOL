@@ -5,13 +5,8 @@
 #include "MateriaSource.hpp"
 #include "Character.hpp"
 
-void fun()
-{
-    system("leaks animal");
-}
 int main()
 {
-    atexit(fun);
     IMateriaSource* src = new MateriaSource();
     src->learnMateria(new Ice());
     src->learnMateria(new Cure());
@@ -24,6 +19,10 @@ int main()
     ICharacter* bob = new Character("bob");
     me->use(0, *bob);
     me->use(1, *bob);
+    me->unequip(0);
+    me->use(0, *bob);
+    me->use(1, *bob);
+    me->unequip(-1);
     delete bob;
     delete me;
     delete src;

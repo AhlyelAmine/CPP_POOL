@@ -7,12 +7,14 @@ Character::Character() : name("name")
 {
     for (int i = 0; i < 4; i++)
         this->slot[i] = NULL;
+    this->garbage = NULL;
 }
 
 Character::Character(const std::string name) : name(name)
 {
     for (int i = 0; i < 4; i++)
         this->slot[i] = NULL;
+    this->garbage = NULL;
 }
 
 Character::Character(const Character& character)
@@ -36,6 +38,9 @@ Character& Character::operator=(const Character& character)
         else
             this->slot[i] = NULL;
     }
+    if (this->garbage)
+        delete this->garbage;
+    this->garbage = NULL;
     this->name = character.name;
     return (*this);
 }
@@ -59,7 +64,18 @@ void Character::unequip(int idx)
 {
     if (idx > 3 || idx < 0 || !this->slot[idx])
         return ;
+    clean();
+    this->garbage = this->slot[idx];
     this->slot[idx] = NULL;
+}
+
+void Character::clean(void)
+{
+    if (this->garbage)
+    {
+        delete this->garbage;
+        this->garbage = NULL;
+    }
 }
 
 void Character::use(int idx, ICharacter& target)
@@ -74,5 +90,10 @@ Character::~Character()
     for (int i = 0; i < 4; i++) {
         if (this->slot[i])
             delete this->slot[i];
+    }
+    if (this->garbage)
+    {
+        delete this->garbage;
+        this->garbage = NULL;
     }
 }

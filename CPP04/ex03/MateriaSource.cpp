@@ -20,7 +20,7 @@ void MateriaSource::learnMateria(AMateria* materia)
     if (materia) {
         for (int i = 0; i < 4; i++) {
             if (!this->slot[i])  {
-                this->slot[i] = materia->clone();
+                this->slot[i] = materia;
                 break ;
             }
         }
@@ -33,8 +33,6 @@ AMateria* MateriaSource::createMateria(std::string const & type)
         if (this->slot[i]) {
             if (this->slot[i]->getType() == type) {
                 AMateria *tmp = this->slot[i]->clone();
-                // delete this->slot[i];
-                // this->slot[i] = NULL;
                 return (tmp);
             }
         }
