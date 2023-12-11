@@ -19,6 +19,9 @@ Character::Character(const std::string name) : name(name)
 
 Character::Character(const Character& character)
 {
+    for (int i = 0; i < 4; i++)
+        this->slot[i] = NULL;
+    this->garbage = NULL;
     *this = character;
 }
 
