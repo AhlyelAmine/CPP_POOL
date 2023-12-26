@@ -1,9 +1,9 @@
 #ifndef SHRUBBERYCREATIONFORM_HPP
 # define SHRUBBERYCREATIONFORM_HPP
 
-#include "AForm.hpp"     
+#include "Form.hpp"     
 
-class ShrubberyCreationForm : public AForm
+class ShrubberyCreationForm : public Form
 {
         ShrubberyCreationForm();
     public:

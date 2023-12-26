@@ -1,7 +1,7 @@
 #ifndef INTERN_HPP
 # define INTERN_HPP
 
-# include "AForm.hpp"
+# include "Form.hpp"
 
 # define PPF "presidential pardon"
 # define RRF "robotomy request"
@@ -14,7 +14,7 @@ class Intern
         ~Intern();
         Intern(const Intern& intern);
         Intern& operator=(const Intern& intern);
-        AForm*   makeForm(std::string formName, std::string target);
+        Form*   makeForm(std::string formName, std::string target);
         class FormDoesNotExistException : public std::exception
         {
             public :

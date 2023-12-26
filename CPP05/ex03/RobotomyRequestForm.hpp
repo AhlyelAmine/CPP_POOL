@@ -2,9 +2,9 @@
 # define ROBOTOMYREQUESTFORM_HPP
 
 # define NOISE "saaba saaba saaba saaba saaba saaba saaba saaba saaba saaba saaba saaba\nsaaba saaba saaba saaba saaba saaba saaba saaba saaba saaba saaba saaba\nsaaba saaba saaba saaba saaba saaba saaba saaba saaba saaba saaba saaba\nsaaba saaba saaba saaba saaba saaba saaba saaba saaba saaba saaba sa\n"
-#include "AForm.hpp"     
+#include "Form.hpp"     
 
-class RobotomyRequestForm : public AForm
+class RobotomyRequestForm : public Form
 {
         RobotomyRequestForm();
     public :

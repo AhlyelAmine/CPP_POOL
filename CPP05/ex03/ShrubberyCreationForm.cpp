@@ -1,33 +1,25 @@
 #include "ShrubberyCreationForm.hpp"
-#include "AForm.hpp"
+#include "Form.hpp"
 #include <fstream>
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm(target, 145, 137) 
-{
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form(target, 145, 137) {}
 
-}
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
-ShrubberyCreationForm::~ShrubberyCreationForm()
-{
-
-}
-
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& shrubberyCreationForm) : AForm(shrubberyCreationForm.getName(), shrubberyCreationForm.getGradeToSign(), shrubberyCreationForm.getGradeToExecute())
-{
-
-}
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& shrubberyCreationForm) : \
+Form(shrubberyCreationForm.getName(), shrubberyCreationForm.getGradeToSign(), shrubberyCreationForm.getGradeToExecute()) {}
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& shrubberyCreationForm)
 {
-    // this->name = shrubberyCreationForm.name;
-    (void)shrubberyCreationForm;
+    if (this != &shrubberyCreationForm)
+        return (*this);
     return (*this);
 }
 
 bool    ShrubberyCreationForm::execute(const Bureaucrat& executor) const
 {
     if (this->getGradeToExecute() < executor.getGrade())
-        return (throw (AForm::GradeTooLowException()), false);
+        return (throw (Form::GradeTooLowException()), false);
     else if (!this->getIsSigned())
     {
         std::cerr << "ShrubberyCreationForm couldn't be executed by " << executor.getName() << " because form it wasn't signed!" << std::endl;

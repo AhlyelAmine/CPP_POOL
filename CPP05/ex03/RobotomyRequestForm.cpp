@@ -2,28 +2,24 @@
 #include <ctime>
 #include <cstdlib>
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm(target, 72, 45)
-{
-}
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : Form(target, 72, 45) {}
 
-RobotomyRequestForm::~RobotomyRequestForm()
-{
-}
+RobotomyRequestForm::~RobotomyRequestForm() {}
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& robotomyRequestForm) : AForm(robotomyRequestForm.getName(), robotomyRequestForm.getGradeToSign(), robotomyRequestForm.getGradeToExecute())
-{
-}
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& robotomyRequestForm) : \
+Form(robotomyRequestForm.getName(), robotomyRequestForm.getGradeToSign(), robotomyRequestForm.getGradeToExecute()) {}
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& robotomyRequestForm)
 {
-    (void)robotomyRequestForm;
+    if (this != &robotomyRequestForm)
+        return (*this);
     return (*this);
 }
 
 bool    RobotomyRequestForm::execute(const Bureaucrat& executor) const
 {
     if (this->getGradeToExecute() < executor.getGrade())
-        return (throw (AForm::GradeTooLowException()), false);
+        return (throw (Form::GradeTooLowException()), false);
     else if (!this->getIsSigned())
     {
         std::cerr << "RobotomyRequestForm couldn't be executed by " << executor.getName() << " because form it wasn't signed!" << std::endl;

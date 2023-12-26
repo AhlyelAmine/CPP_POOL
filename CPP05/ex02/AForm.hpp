@@ -14,7 +14,7 @@ class AForm
         AForm();
     public:
         virtual bool    execute(const Bureaucrat & executor) const = 0;
-        ~AForm();
+        virtual ~AForm();
         AForm(const std::string name, const int gradeToSign, const int gradeToExecute);
         AForm(const AForm &form);
         AForm &operator=(const AForm &form);

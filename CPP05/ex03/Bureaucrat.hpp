@@ -2,8 +2,8 @@
 # define BUREAUCRAT_HPP
 
 #include <iostream>
-#include "AForm.hpp"
-class AForm;
+#include "Form.hpp"
+class Form;
 class Bureaucrat
 {
     private :
@@ -30,7 +30,7 @@ class Bureaucrat
                 virtual const char* what() const throw();
         };
         void    signForm(const std::string name, const bool isSigned) const;
-        void    executeForm(AForm const & form);
+        void    executeForm(Form const & form);
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat);

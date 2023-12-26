@@ -1,8 +1,6 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::~Bureaucrat()
-{
-}
+Bureaucrat::~Bureaucrat() {}
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : name(name)
 {
@@ -68,7 +66,7 @@ void    Bureaucrat::signForm(const std::string name, const bool isSigned) const
         std::cout << this->name << " couldn’t sign " << name << " because the grade is too low\n";  
 }
 
-void Bureaucrat::executeForm(AForm const& form)
+void Bureaucrat::executeForm(Form const& form)
 {
 	if (form.execute(*this))
         std::cout << this->name << " executes " << form.getName() << std::endl;
