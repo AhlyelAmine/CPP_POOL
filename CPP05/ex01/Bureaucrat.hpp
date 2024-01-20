@@ -8,7 +8,7 @@ class Bureaucrat
 {
     private :
         const std::string name;
-        int grade;
+        unsigned char grade;
         Bureaucrat();
     public :
         ~Bureaucrat();

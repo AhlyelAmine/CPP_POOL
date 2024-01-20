@@ -4,7 +4,6 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm(target, 145, 137) 
 {
-
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
@@ -19,8 +18,8 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& shrubb
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& shrubberyCreationForm)
 {
-    // this->name = shrubberyCreationForm.name;
-    (void)shrubberyCreationForm;
+    if (&shrubberyCreationForm != this)
+        return (*this);
     return (*this);
 }
 

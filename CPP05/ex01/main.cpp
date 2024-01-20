@@ -7,7 +7,7 @@ int main()
     {
         Bureaucrat bureaucrat("Bureaucrat", 2);
 
-        Form form("Form", 1, 1);
+        Form form("Form", 2, 1);
         std::cout << bureaucrat;
         std::cout << form;
         form.beSigned(bureaucrat);

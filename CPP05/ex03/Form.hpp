@@ -9,8 +9,8 @@ class Form
     private:
         const std::string   name;
         bool                isSigned;
-        const int           gradeToSign;
-        const int           gradeToExecute;
+        const unsigned char gradeToSign;
+        const unsigned char gradeToExecute;
         Form();
     public:
         virtual bool    execute(const Bureaucrat & executor) const = 0;

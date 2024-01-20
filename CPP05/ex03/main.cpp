@@ -11,7 +11,7 @@ int main()
         Intern someRandomIntern;
         Form* rrf;
 
-        rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+        rrf = someRandomIntern.makeForm("presidentdial pardon", "Bender");
         std::cout << *rrf;
         delete rrf;
     }

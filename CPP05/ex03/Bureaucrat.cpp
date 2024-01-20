@@ -13,7 +13,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : name(name)
 
 Bureaucrat::Bureaucrat(const Bureaucrat& bureaucrat) : name(bureaucrat.name)
 {
-    this->grade = grade;
+    this->grade = bureaucrat.grade;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& bureaucrat)

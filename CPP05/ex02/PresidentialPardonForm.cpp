@@ -10,7 +10,8 @@ PresidentialPardonForm::~PresidentialPardonForm()
 
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& presidentialPardonForm) : AForm(presidentialPardonForm.getName(), presidentialPardonForm.getGradeToSign(), presidentialPardonForm.getGradeToExecute())
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& presidentialPardonForm) : 
+AForm(presidentialPardonForm.getName(), presidentialPardonForm.getGradeToSign(), presidentialPardonForm.getGradeToExecute())
 {
     
 }

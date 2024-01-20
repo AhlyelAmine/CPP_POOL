@@ -17,7 +17,7 @@ name(name), gradeToSign(gradeToSign),  gradeToExecute(gradeToExecute)
 
 AForm::AForm(const AForm &form) : name(form.name),  gradeToSign(form.gradeToSign), gradeToExecute(form.gradeToExecute)
 {
-    this->isSigned = isSigned;
+    this->isSigned = form.isSigned;
 }
 
 AForm&  AForm::operator=(const AForm& form)
@@ -58,16 +58,12 @@ const char* AForm::GradeTooLowException::what() const throw()
 
 void    AForm::beSigned(const Bureaucrat &bureaucrat)
 {
-    if (bureaucrat.getGrade() <= this->gradeToSign) 
-    {
+    bool    check = bureaucrat.getGrade() <= this->gradeToSign;
+    if (check)
         this->isSigned = true;
-        bureaucrat.signForm(this->name, this->isSigned);
-    }
-    else
-    {
-        bureaucrat.signForm(this->name, this->isSigned);
+    bureaucrat.signForm(this->name, this->isSigned);
+    if (!check)
         throw (AForm::GradeTooLowException());
-    }
 }
 
 std::ostream& operator<<(std::ostream& os, const AForm& form)
