@@ -3,6 +3,16 @@
 
 # include <iostream>
 
+enum pseudo_literal 
+{
+    Normal,
+    Nan,
+    Inf_p,
+    Inf_n,
+    Impossible,
+    CHAR
+};
+
 class ScalarConverter
 {
     ScalarConverter();

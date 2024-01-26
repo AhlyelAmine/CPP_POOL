@@ -1,7 +1,7 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = convert 
-SRCS =	ScalarConverter.cpp main.cpp
+SRCS =	Serializer.cpp main.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
@@ -9,7 +9,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp ScalarConverter.hpp
+%.o: %.cpp Serializer.hpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
