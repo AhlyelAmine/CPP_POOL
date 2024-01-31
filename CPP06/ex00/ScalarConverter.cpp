@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cctype>
 #include <cmath>
+#include <climits>
 
 ScalarConverter::~ScalarConverter()
 {
@@ -27,19 +28,20 @@ static bool isChar(std::string value)
         return (true);
     return (false);
 }
-static enum pseudo_literal isNan(std::string &value, bool _isChar)
+static enum pseudo_literal isNan(std::string &value, bool &_isChar)
 {
+
     if (value == "nan" || value == "nanf")
         return (Nan);
     else if (value == "inf" || value == "+inff" || value == "+inf")
         return (Inf_p);
     else if (value == "-inff" || value == "-inf")
         return (Inf_n);
+    if ((_isChar = isChar(value)))
+        return (CHAR);
     if (!_isChar && value[value.size() - 1] == 'f')
         value.erase(value.size() - 1, value.size() - 1);
-    if (isChar(value))
-        return (CHAR);
-    else if (isImpossible(value))
+    if (isImpossible(value))
         return (Impossible);
     return (Normal);
 }
@@ -50,7 +52,7 @@ static void    print(long i, float f, double d)
         std::cout << "int\t: impossible" << std::endl;
     else
         std::cout << "int\t: " <<  static_cast<int>(i) << std::endl;
-    if (f == static_cast<long>(f) && f < 1000000) {
+    if ((f == static_cast<long>(f)) && f < 1000000) {
         std::cout << "float\t: " << f << ".0f" << std::endl;
         std::cout << "double\t: " << d << ".0" << std::endl;
     }
@@ -62,7 +64,6 @@ static void    print(long i, float f, double d)
 }
 static void ConvertEntry(std::string& value, bool _isChar)
 {
-    int     i;
     double  d;
     float   f;
     long    l;
@@ -92,7 +93,6 @@ void ScalarConverter::convert(std::string& value)
     bool _isChar;
     enum pseudo_literal pseudo;
 
-    _isChar = isChar(value);
     pseudo = isNan(value, _isChar);
     switch (pseudo)
     {

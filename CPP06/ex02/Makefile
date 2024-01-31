@@ -1,7 +1,7 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = identify 
-SRCS =	Base.cpp A.cpp B.cpp C.cpp main.cpp  
+SRCS =	Base.cpp  main.cpp  
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
