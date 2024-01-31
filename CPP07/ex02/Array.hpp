@@ -10,20 +10,19 @@ class Array
     T *array;
     unsigned int n;
 
-public:
-    Array();
-    Array(unsigned int n);
-    Array(const Array &copy);
-    ~Array();
-    Array &operator=(const Array &copy);
-    int &operator[](unsigned int i);
-    unsigned int size() const;
-
-    class OutOfLimitsException : public std::exception
-    {
     public:
-        virtual const char *what() const throw();
-    };
+        Array();
+        Array(unsigned int n);
+        Array(const Array &copy);
+        ~Array();
+        Array &operator=(const Array &copy);
+        int &operator[](unsigned int i);
+        unsigned int size() const;
+        class OutOfLimitsException : public std::exception
+        {
+            public:
+                virtual const char *what() const throw();
+        };
 };
 
 template <typename T>
@@ -68,12 +67,16 @@ int &Array<T>::operator[](unsigned int i)
 {
     try
     {
-        return this->array[i];
+        if (i < this->n && i >= 0)
+            return (this->array[i]);
+        else
+            throw Array::OutOfLimitsException();
     }
     catch (std::exception &e)
     {
         std::cout << e.what();
     }
+    return (this->array[n - 1]);
 }
 
 template <typename T>
@@ -88,4 +91,4 @@ const char *Array<T>::OutOfLimitsException::what() const throw()
     return "out of range\n";
 }
 
-#endif // ARRAY_HPP
+#endif
