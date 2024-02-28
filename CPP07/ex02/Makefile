@@ -1,7 +1,7 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address -g
 NAME = identify 
-SRCS =	main.cpp Array.cpp
+SRCS =	main.cpp	
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
