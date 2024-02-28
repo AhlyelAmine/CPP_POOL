@@ -67,7 +67,7 @@ int &Array<T>::operator[](unsigned int i)
 {
     try
     {
-        if (i < this->n && i >= 0)
+        if (i < this->n)
             return (this->array[i]);
         else
             throw Array::OutOfLimitsException();
