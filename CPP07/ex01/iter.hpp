@@ -11,21 +11,21 @@ void iter(T *array, size_t length, void (*f)(T &))
 }
 template <typename T>
 
-void print(T & t)
+void print(const T& t)
 {
     std::cout << t << " ";
 }
 
 template <typename T>
 
-void mult10(T &t)
+void mult10(const T& t)
 {
     t = t * 10;
 }
 
 template <typename T>
 
-void inc(T &t)
+void inc(const T& t)
 {
     t = t + 1;
 }
