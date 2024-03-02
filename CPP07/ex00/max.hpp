@@ -3,7 +3,7 @@
 
 template <typename T>
 
-T max(T a, T b)
+T max(const T a, const T b)
 {
     if (a > b)
         return (a);
