@@ -34,7 +34,7 @@ template <typename T>
 Array<T>::Array(unsigned int n) : array(new T[n]), n(n)
 {
     for (unsigned int i(0); i < n; i++)
-        this->array[i] = i;
+        this->array[i] = rand();
 }
 
 template <typename T>
