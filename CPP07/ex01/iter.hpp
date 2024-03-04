@@ -2,13 +2,14 @@
 # define ITER_HPP
 #include <iostream>
 
-template <typename T>
+template <typename T, typename I, typename F>
 
-void iter(T *array, size_t length, void (*f)(T &))
+void iter(T *array, I length, void (*f)(F &))
 {
-    for (size_t i = 0; i < length; i++)
+    for (I i = 0; i < length; i++)
         f(array[i]);
 }
+
 template <typename T>
 
 void print(T & t)
