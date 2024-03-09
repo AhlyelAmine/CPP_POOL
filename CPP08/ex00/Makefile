@@ -1,7 +1,7 @@
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address -g
-NAME = stack 
-SRCS =	main.cpp
+CFLAGS = -Wall -Wextra -Werror -std=c++98
+NAME = template 
+SRCS = main.cpp  
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
@@ -9,7 +9,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp MutantStack.hpp MutantStack.tpp
+%.o: %.cpp easyfind.hpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

@@ -12,7 +12,7 @@ int main(int, char**)
         fill the array and ptr with same values
         and check that operator[] works as excepted
     */    
-    for (int i = 0; i < array.size(); i++)
+    for (unsigned int i = 0; i < array.size(); i++)
     {
         int tmp = rand();
         array[i] = tmp;
@@ -29,7 +29,7 @@ int main(int, char**)
     /*
         double check that array and ptr contains the same values ;) 
     */
-    for (int i = 0; i < array.size(); i++)
+    for (unsigned int i = 0; i < array.size(); i++)
     {
         if (ptr[i] != array[i])
         {
@@ -62,7 +62,7 @@ int main(int, char**)
     /*
         modify the values of the array to make sure that our operator[] works as excepted
     */
-    for (int i = 0; i < array.size(); i++)
+    for (unsigned int i = 0; i < array.size(); i++)
     {
         array[i] = rand();
     }
