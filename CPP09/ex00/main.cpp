@@ -5,17 +5,18 @@
 #include <map>
 #define DATA_PATH "data.csv"
 #include "Date.hpp"
+#include "BtcDatabase.hpp"
+#include "BitcoinExchange.hpp"
+#include "BtcDatabase.hpp"
 
 void    check_value_validity(std::string portion, double &value)
 {
-    if (portion.empty())
-        throw ("invalid csv format");
     value = atof(portion.c_str());
-    if (value < 0 || value > 1000)
-        throw "invalid value format";
+    if (value < 0)
+        throw std::string("Error: not a positive number.");
+    if (value > 1000)
+        throw std::string("Error: too large a number.");
 }
-
-std::map<std::string, Date*> map;
 
 Date *date_parser(std::string portion)
 {
@@ -23,120 +24,152 @@ Date *date_parser(std::string portion)
     std::string year,month,day;
     getline(date, year,'-');
     if (date.eof())
-        throw "invalid format";
+        throw portion;
     getline(date, month,'-');
     if (date.eof())
-        throw "invalid format";
+        throw portion;
     date >> day;
     Date * a = NULL;
-    try {
+    try
+    {
         a = new Date(year, month, day);
     }
-    catch (const char *e)
+    catch (const std::string &e)
     {
-        throw e;
+        throw portion;
     }
     return (a);
 }
 
-bool csv_parser(std::string &line)
+bool csv_parser(std::string const &line)
 {
-    Date *a=NULL;
+    struct data data;
+    data.date = NULL;
     std::stringstream l(line);
     std::string portion;
     l >> portion;
     try
     {
-        a = date_parser(portion);
+        data.date = date_parser(portion);
     }
-    catch(const char *e)
+    catch (const std::string &e)
     {
-        throw e;
+        throw "Error: bad input => " + e;
     }
     l >> portion;
-    if (portion.empty() || l.eof())
+    if (portion != "|")
     {
-        delete a;
-        throw "incomplete params";
+        delete data.date;
+        throw std::string("invalid format");
+    }
+    if (l.eof())
+    {
+        delete data.date;
+        throw std::string("Error: missing number");
     }
     l >> portion;
     try
     {
-        check_value_validity(portion, a->value);
+        check_value_validity(portion, data.value);
     }
-    catch(const char *e)
+    catch (const std::string &e)
     {
-        delete a;
+        delete data.date;
         throw e;
     }
-    map[a->date] = a;
+    try
+    {
+        std::cout << *data.date << " => " << data.value * BitcoinExchange::getBitcoinExchangeInstance()->getLowerBoundOf(*data.date) << std::endl;
+    }
+    catch (const std::string &e)
+    {
+        delete data.date;
+        throw e;
+    }
+    delete data.date;
     return (true);
+}
+
+void    checkCsvHeader(std::string const &line)
+{
+    std::string tmp;
+    
+    std::stringstream stream(line);
+    stream >> tmp;
+    if (tmp == "date")
+    {
+        stream >> tmp;
+        if (tmp == "|")
+        {
+            stream >> tmp;
+            if (tmp != "value")
+            {
+                try
+                {
+                    csv_parser(line);
+                }
+                catch (const std::string &e)
+                {
+                    std::cerr << e << '\n';
+                }
+            }
+        }
+    }
 }
 
 void read_data(std::ifstream &s)
 {
     std::string line;
+
     getline(s, line);
-    std::stringstream a(line);
-    a >> line;
-    if (line != "date")
-        throw "invalid csv file\n";
-    a >> line;
-    if (line != "|")
-        throw "invalid csv file\n";
-    a >> line;
-    if (line != "value")
-        throw "invalid csv file\n";
+
+
+    checkCsvHeader(line);
+
     do
     {
         getline(s, line);
         try
         {
             csv_parser(line);
-            // std::cout << sDate.year << "-" << sDate.mounth << "-" << sDate.day << " | " << value << "\n";
         }
-        catch(const char *e)
+        catch (const std::string &e)
         {
             std::cerr << e << '\n';
         }
     }
     while (!s.eof());
-    std::map<std::string, Date*>::iterator it = map.begin();
-    while (it != map.end())
-    {
-        std::cout << *it->second << std::endl;
-        it++;
-    }
 }
 
 int main(int argc, char const *argv[])
 {
-    std::ifstream data(DATA_PATH);
-    if (!data.is_open())
+    if (argc == 2)
     {
-        std::cerr << "No such file data.csv\n";
-        return (1);
-    }
-    if (argc != 2)
-    {
-        std::cerr << "USAGE : ./btc <input_file>\n";
-        return (2);
-    }
-    std::ifstream target(argv[1]);
-    if (!target.is_open())
-    {
-        std::cerr << "No such file " + std::string(argv[1]) + "\n";
-        return (3);
-    }
-    try
-    {
-        read_data(target);
-    }
-    catch(const char *e)
-    {
-        std::cerr << e;
-    }
-    
+        std::ifstream data(DATA_PATH);
+        std::ifstream target(argv[1]);
 
-    return 0;
+        if (!data.is_open() || !target.is_open())
+            return (std::cerr << "Error: could not open file.\n", 1);
+
+        try
+        {
+            BitcoinExchange::InstanceBitcoinExchange(data);
+        }
+        catch (const std::string &e)
+        {
+            std::cerr << e;
+        }
+
+        try
+        {
+            read_data(target);
+        }
+        catch (const std::string &e)
+        {
+            std::cerr << e;
+        }
+
+        return 0;
+    }
+    return (std::cerr << "Error: could not open file.\n", 1);
 }
