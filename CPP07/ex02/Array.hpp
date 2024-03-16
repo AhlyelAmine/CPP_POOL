@@ -11,84 +11,59 @@ class Array
     unsigned int n;
 
     public:
-        Array();
-        Array(unsigned int n);
-        Array(const Array &copy);
-        ~Array();
-        Array &operator=(const Array &copy);
-        int &operator[](unsigned int i);
-        unsigned int size() const;
+
+        Array(): array(new T()), n(0){}
+
+        Array(unsigned int n): array(new T[n]), n(n)
+        {
+            for (unsigned int i(0); i < n; i++)
+                this->array[i] = rand();
+        }
+
+        Array(const Array &copy) : array(new T[copy.n]), n(copy.n)
+        {
+            for (unsigned int i(0); i < copy.n; i++)
+                this->array[i] = copy.array[i];
+        }
+
+        Array &operator=(const Array &copy)
+        {
+            delete[] this->array;
+            this->array = new T[copy.n];
+            for (unsigned int i(0); i < copy.n; i++)
+            {
+                this->array[i] = copy.array[i];
+            }
+        }
+
+        int &operator[](unsigned int i)
+        {
+            if (i >= this->n)
+                throw Array::OutOfLimitsException();
+            return (this->array[i]);
+        }
+
+        int &operator[](unsigned int i) const
+        {
+            if (i >= this->n)
+                throw Array::OutOfLimitsException();
+            return (this->array[i]);
+        }
+
+        unsigned int size() const
+        {
+            return this->n;
+        }
+
+        ~Array()
+        {
+            delete[] this->array;
+        }
         class OutOfLimitsException : public std::exception
         {
             public:
-                virtual const char *what() const throw();
+                const char *what() const throw() {return "out of range";}
         };
 };
-
-template <typename T>
-Array<T>::Array() : array(new T()), n(0)
-{
-}
-
-template <typename T>
-Array<T>::Array(unsigned int n) : array(new T[n]), n(n)
-{
-    for (unsigned int i(0); i < n; i++)
-        this->array[i] = rand();
-}
-
-template <typename T>
-Array<T>::Array(const Array &copy) : array(new T[copy.n]), n(copy.n)
-{
-    for (unsigned int i(0); i < copy.n; i++)
-        this->array[i] = copy.array[i];
-}
-
-template <typename T>
-unsigned int Array<T>::size() const
-{
-    return this->n;
-}
-
-template <typename T>
-Array<T> &Array<T>::operator=(const Array &copy)
-{
-    if (this->array)
-        delete[] this->array;
-    this->array = new T[copy.n];
-    for (unsigned int i(0); i < copy.n; i++)
-    {
-        this->array[i] = copy.array[i];
-    }
-}
-
-template <typename T>
-int &Array<T>::operator[](unsigned int i)
-{
-    try
-    {
-        if (i < this->n)
-            return (this->array[i]);
-        else
-            throw Array::OutOfLimitsException();
-    }
-    catch (std::exception &e)
-    {
-        std::cout << e.what();
-    }
-    return (this->array[n - 1]);
-}
-
-template <typename T>
-Array<T>::~Array()
-{
-    delete[] this->array;
-}
-
-template <typename T>
-const char *Array<T>::OutOfLimitsException::what() const throw()
-{
-    return "out of range\n";
-}
 
 #endif
