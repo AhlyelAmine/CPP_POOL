@@ -1,12 +1,10 @@
 #include "MutantStack.hpp"
 #include <stack>
+#include <queue>
 #include <iterator>
 int main()
 {
-    // std::stack<int> mstack;
-    // std::vector<int> lol;
-    // std::vector<int>::iterator a = lol.begin();
-    MutantStack<int> mstack;
+    MutantStack<int > mstack;
     mstack.push(5);
     mstack.push(17);
     std::cout << mstack.top() << std::endl;
@@ -26,8 +24,9 @@ int main()
     --it;
     while (it != ite)
     {
-    std::cout << *it << std::endl;
-    ++it;
+        
+        std::cout << *it << std::endl;
+        ++it;
     }
     std::stack<int> s(mstack);
     return 0;

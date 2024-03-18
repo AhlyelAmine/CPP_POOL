@@ -12,7 +12,8 @@ Span::Span(Span const &span)
 
 Span &Span::operator=(Span const &span)
 {
-    maxSize = span.maxSize;
+    this->maxSize = span.maxSize;
+    this->span = span.span;
     return (*this);
 }
 
@@ -33,11 +34,11 @@ int Span::shortestSpan()
     if (this->span.size() < 2)
         throw "span size is too short\n";
     std::sort(this->span.begin(), this->span.end());
-    int shortpath = this->span[1] - this->span[0];
+    int shortpath = abs(this->span[1] - this->span[0]);
     for (size_t i = 1; i < this->span.size() - 1; i++)
     {
-        if (this->span[i + 1] - this->span[i] < shortpath)
-            shortpath = this->span[i + 1] - this->span[i];
+        if (abs(this->span[i + 1] - this->span[i]) < shortpath)
+            shortpath = abs(this->span[i + 1] - this->span[i]);
     }
     return (shortpath);
 }
@@ -47,13 +48,7 @@ int Span::longestSpan()
     if (this->span.size() < 2)
         throw "span size is too short\n";
     std::sort(this->span.begin(), this->span.end());
-    int longpath = this->span.back() - this->span[0];
-    for (size_t i = 1; i < this->span.size() - 1; i++)
-    {
-        if (this->span.back() - this->span[i] > longpath)
-            longpath = this->span.back() - this->span[i];
-    }
-    return (longpath);
+    return (abs(this->span.back() - this->span[0]));
 }
 
 void Span::addNumbers(std::vector<int> subspan)
