@@ -166,6 +166,15 @@ void BitcoinExchange::InstanceBitcoinExchange(std::ifstream&stream)
     }
 }
 
+void BitcoinExchange::DeleteBitcoinExchange()
+{
+    if (bitcoinExchange)
+    {
+        delete bitcoinExchange;
+        bitcoinExchange = NULL;
+    }
+}
+
 BitcoinExchange*    BitcoinExchange::getBitcoinExchangeInstance()
 {
     return (bitcoinExchange);

@@ -64,6 +64,7 @@ class BitcoinExchange : public BtcDatabase
     public :
         static void                InstanceBitcoinExchange(std::ifstream&);
         static BitcoinExchange*    getBitcoinExchangeInstance();
+        static void DeleteBitcoinExchange();
         ~BitcoinExchange();
 };
 
