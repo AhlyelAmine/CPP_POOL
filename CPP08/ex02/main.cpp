@@ -1,33 +1,54 @@
 #include "MutantStack.hpp"
 #include <stack>
-#include <queue>
 #include <iterator>
+
 int main()
 {
-    MutantStack<int > mstack;
-    mstack.push(5);
-    mstack.push(17);
-    std::cout << mstack.top() << std::endl;
-    mstack.pop();
-    std::cout << mstack.top() << std::endl;
-    std::cout << mstack.size() << std::endl;
-    mstack.push(3);
-    mstack.push(5);
-    mstack.push(737);
-    //[...]
-    std::cout << mstack.top() << std::endl;
-    std::cout << mstack.size() << std::endl;
-    mstack.push(0);
-    MutantStack<int>::iterator it = mstack.begin();
-    MutantStack<int>::iterator ite = mstack.end();
-    ++it;
-    --it;
-    while (it != ite)
+    MutantStack<int > stack;
+
+    stack.push(4);
+    stack.push(8);
+    stack.push(4);
+    stack.push(5);
+    std::cout << stack.top();
+    stack.pop();
+    std::cout << stack.top();
+    stack.pop();
+    std::cout << stack.top();
+    stack.pop();
+    std::cout << stack.top() << std::endl;
+    stack.pop();
+    stack.push(42);
+    stack.push(37);
+    stack.push(13);
+    std::cout << stack.size() << std::endl;
+    std::cout << stack.top();
+    stack.pop();
+    std::cout << stack.top() << std::endl;
+
+    std::cout << stack.size() << std::endl;
+    stack.push(0);
+
+    std::cout << "-------------------------------\n"; 
+    MutantStack<int>::iterator it = stack.end();
+    do
     {
-        
+        it--;
         std::cout << *it << std::endl;
-        ++it;
     }
-    std::stack<int> s(mstack);
+    while (it != stack.begin());
+    std::cout << "-------------------------------\n"; 
+
+    /*
+        the ability to convert MutantStack to regular std::stack container
+    */
+    std::cout << "-------------------------------\n"; 
+    std::stack<int> regularStack(stack);
+    while (!regularStack.empty())
+    {
+        std::cout << regularStack.top() << std::endl;
+        regularStack.pop();
+    }
+    std::cout << "-------------------------------\n"; 
     return 0;
 }

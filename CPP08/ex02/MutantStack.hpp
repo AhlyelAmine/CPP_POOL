@@ -1,37 +1,26 @@
-#ifndef MUTANTSTACK_HPP
-#define MUTANTSTACK_HPP
+#ifndef MUTANT_STACK_HPP
+#define MUTANT_STACK_HPP
 
 #include <iostream>
 #include <stack>
 
-template <class TYPE, class container = std::deque <TYPE> >
-class MutantStack : public std::stack<TYPE, container>
+template <class _Type>
+class MutantStack : public std::stack<_Type>
 {
-    TYPE *array;
-    size_t lenght;
-    size_t capacity;
     public:
-    MutantStack(){}
-    MutantStack& operator=(const MutantStack& a)
-    {
-        (void)a;
-        std::stack< TYPE, container >::operator=( a );
-        return *this;
-    }
-    MutantStack(const MutantStack& a){a = *this;}
-    MutantStack(size_t){}
-    ~MutantStack(){}
-    // void push(TYPE const &);
-    // void pop();
-    // size_t size();
-    typedef typename container::iterator    iterator;
+        MutantStack(){}
+        MutantStack& operator=(const MutantStack& objet)
+        {
+            std::stack< _Type>::operator=(objet);
+            return *this;
+        }
+        MutantStack(const MutantStack& a){a = *this;}
+        ~MutantStack(){};
 
-    iterator    begin() { return this->c.begin(); }
-    iterator    end() { return this->c.end(); }
-    // TYPE& top();
-    // bool empty();
+        typedef typename std::deque <_Type >::iterator    iterator;
+
+        iterator    begin() { return this->c.begin(); }
+        iterator    end() { return this->c.end(); }
 };
-
-#include "MutantStack.tpp"
 
 #endif
