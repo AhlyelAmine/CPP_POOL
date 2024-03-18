@@ -2,9 +2,20 @@
 
 int main()
 {
-    int	const           set[]	= { 42, 54, 957, 432, 1234, 0, 754, 16576 };
+    int	           set[100000];
+    int            i = -1;
+
+    while (++i < 100000)
+        set[i] = i + -50000;
+    /*
+        init set with range (-50000 - 49999) so the longest span is 99999 and shortest span 1
+    */
 	size_t const        set_size( sizeof(set) / sizeof(int) );
+    
 	std::vector<int>    subspan( set, set + set_size );
+
+
+
 
     Span sp = Span(5);
 
@@ -29,8 +40,8 @@ int main()
 
     try
     {
-        std::cout << "shortest span : " << sp.shortestSpan() << std::endl;
-        std::cout << "longest span : " << sp.longestSpan() << std::endl;
+        std::cout << "shortest span for sp: " << sp.shortestSpan() << std::endl;
+        std::cout << "longest span for sp: " << sp.longestSpan() << std::endl;
     }
     catch(const char* e)
     {
@@ -39,11 +50,24 @@ int main()
     std::cout << "-------------------------------\n"; 
 
     sp.addNumbers(subspan);
-
     try
     {
-        std::cout << "shortest span : " << sp.shortestSpan() << std::endl;
-        std::cout << "longest span : " << sp.longestSpan() << std::endl;
+        std::cout << "shortest span for sp: " << sp.shortestSpan() << std::endl;
+        std::cout << "longest span for sp: " << sp.longestSpan() << std::endl;
+    }
+    catch(const char* e)
+    {
+        std::cerr << e << '\n';
+    }
+    std::cout << "-------------------------------\n"; 
+    std::cout << "-------------------------------\n"; 
+
+    Span subSp = Span(0);
+    subSp.addNumbers(subspan);
+    try
+    {
+        std::cout << "shortest span for subSp: " << subSp.shortestSpan() << std::endl;
+        std::cout << "longest span for subSp: " << subSp.longestSpan() << std::endl;
     }
     catch(const char* e)
     {
