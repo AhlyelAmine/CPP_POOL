@@ -184,12 +184,19 @@ BitcoinExchange*    BitcoinExchange::getBitcoinExchangeInstance()
 void    check_value_validity(std::string portion, double &value)
 {
     std::string check(portion);
-    int i = 0;
+    size_t i = 0;
     for (; i < check.size(); i++) {
         if (!isdigit(check[i]))
             break;
     }
     if (check[i] == '.' )
+        i++;
+    for (; i < check.size(); i++) {
+        if (!isdigit(check[i]))
+            break;
+    }
+    if (check[i])
+        throw std::string(("Error: bad input => ")) + portion;
     value = atof(portion.c_str());
     if (value < 0)
         throw std::string("Error: not a positive number.");
@@ -233,7 +240,7 @@ bool csv_parser(std::string const &line)
     }
     catch (const std::string &e)
     {
-        throw "Error: bad input => " + e;
+        throw std::string("Error: bad input => ") + e;
     }
     l >> portion;
     if (portion != "|")

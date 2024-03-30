@@ -5,6 +5,7 @@
 #include <sstream>
 #include <map>
 #include <fstream>
+#include <cstdlib>
 #include <ostream>
 #define DATA_PATH "data.csv"
 
