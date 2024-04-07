@@ -70,9 +70,9 @@ class BitcoinExchange : public BtcDatabase
 };
 
 void    check_value_validity(std::string portion, double &value);
-Date *date_parser(std::string portion);
-bool csv_parser(std::string const &line);
+Date    *date_parser(std::string portion);
+void    csv_parser(std::string const &line);
 void    checkCsvHeader(std::string const &line);
-void read_data(std::ifstream &s);
+void    read_data(std::ifstream &s);
 
 #endif

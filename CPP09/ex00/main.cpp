@@ -4,10 +4,9 @@
 #include <cstdlib>
 #include <map>
 #include "BitcoinExchange.hpp"
-// void leaks(){system("leaks identify");}
+
 int main(int argc, char const *argv[])
 {
-    // atexit(leaks);
     if (argc == 2)
     {
         std::ifstream data(DATA_PATH);

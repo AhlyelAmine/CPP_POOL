@@ -1,12 +1,12 @@
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -MMD -I. -std=c++11 -fsanitize=address -g
+CXXFLAGS = -Wall -Wextra -Werror -MMD -I. -std=c++11 
 NAME = PmergeMe 
 SRCS =	$(shell ls *.cpp)	
 DEPS = $(SRCS:.cpp=.d)
 OBJS = $(SRCS:.cpp=.o)
 all: $(NAME)
 $(NAME): $(OBJS)
-	$(CXX) $(OBJS) -o $(NAME) -fsanitize=address
+	$(CXX) $(OBJS) -o $(NAME) 
 clean:
 	rm -f $(OBJS) $(DEPS)
 fclean: clean

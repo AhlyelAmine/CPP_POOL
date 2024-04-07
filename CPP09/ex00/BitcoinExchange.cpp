@@ -22,7 +22,7 @@ bool Date::validateDate(void)
         return false;
     if (this->sMonth == "02" && this->sDay > "29")
         return false;
-    if ((iYear % 4) && this->sMonth == "2" && this->sDay == "29")
+    if ((iYear % 4) && this->sMonth == "02" && this->sDay == "29")
         return false;
     if (this->sMonth <= "07" && this->sMonth >= "01" && !(iMonth % 2) && this->sDay == "31")
         return false;
@@ -126,7 +126,7 @@ void BtcDatabase::fileParser(std::ifstream& stream)
         }
         catch (const std::string &e)
         {
-            std::cerr << e << '\n';
+            std::cerr << e;
         }
     }
     while (!stream.eof());
@@ -139,6 +139,10 @@ void BtcDatabase::initDatabase(std::ifstream& stream)
 
 double BtcDatabase::getLowerBoundOf(Date const &date)
 {
+    if (this->_map.empty())
+        throw std::string("Error\n");
+    if (this->_map.lower_bound(date.date) == this->_map.end())
+        return (this->_map.rbegin()->second->value);
     return (this->_map.lower_bound(date.date)->second->value);
 }
 
@@ -146,7 +150,7 @@ std::ostream& operator<<(std::ostream& stream, std::map<std::string, struct data
 {
     for (std::map<std::string, struct data*>::const_iterator it = objet.begin(); it != objet.end(); it++)
     {
-        stream << *it->second->date << "," << it->second->value << "\n";
+        stream << *it->second->date << "," << it->second->value << " b\n";
     }
     return stream;
 }
@@ -196,12 +200,12 @@ void    check_value_validity(std::string portion, double &value)
             break;
     }
     if (check[i])
-        throw std::string(("Error: bad input => ")) + portion;
+        throw std::string("Error: bad input => ") + portion + std::string("\n");
     value = atof(portion.c_str());
     if (value < 0)
-        throw std::string("Error: not a positive number.");
+        throw std::string("Error: not a positive number.\n");
     if (value > 1000)
-        throw std::string("Error: too large a number.");
+        throw std::string("Error: too large a number.\n");
 }
 
 Date *date_parser(std::string portion)
@@ -227,7 +231,7 @@ Date *date_parser(std::string portion)
     return (a);
 }
 
-bool csv_parser(std::string const &line)
+void csv_parser(std::string const &line)
 {
     struct data data;
     data.date = NULL;
@@ -240,20 +244,22 @@ bool csv_parser(std::string const &line)
     }
     catch (const std::string &e)
     {
-        throw std::string("Error: bad input => ") + e;
+        throw std::string("Error: bad input => ") + e + std::string("\n");
     }
     l >> portion;
     if (portion != "|")
     {
         delete data.date;
-        throw std::string("invalid format");
+        throw std::string("Error: invalid format\n");
     }
     if (l.eof())
     {
         delete data.date;
-        throw std::string("Error: missing number");
+        throw std::string("Error: missing number\n");
     }
     l >> portion;
+    if (!l.eof() && portion.find_first_not_of(" "))
+        throw std::string("Error: too many args\n");
     try
     {
         check_value_validity(portion, data.value);
@@ -273,7 +279,6 @@ bool csv_parser(std::string const &line)
         throw e;
     }
     delete data.date;
-    return (true);
 }
 
 void    checkCsvHeader(std::string const &line)
@@ -300,7 +305,7 @@ void    checkCsvHeader(std::string const &line)
     }
     catch (const std::string &e)
     {
-        std::cerr << e << '\n';
+        std::cerr << e;
     }
 }
 
@@ -322,7 +327,7 @@ void read_data(std::ifstream &s)
         }
         catch (const std::string &e)
         {
-            std::cerr << e << '\n';
+            std::cerr << e;
         }
     }
     while (!s.eof());

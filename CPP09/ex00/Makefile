@@ -1,5 +1,5 @@
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -MMD -I. -std=c++98 -fsanitize=address
+CXXFLAGS = -Wall -Wextra -Werror -MMD -I. -std=c++98
 NAME = identify 
 SRCS =	$(shell ls *.cpp)	
 DEPS = $(SRCS:.cpp=.d)
