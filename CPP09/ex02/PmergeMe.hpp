@@ -25,11 +25,13 @@ class PmergeMe
 
     public:
 		T			_mainPortion;
+
         // void read_input(int argc, char const *argv[]);
         // void sortPairs();
         // void fillContainers();
         // void makeJacobSeq();
         // void binaryInert();
+
         PmergeMe(){};
         ~PmergeMe(){};
 
@@ -81,20 +83,20 @@ class PmergeMe
                     _mainPortion.push_back(_glb[i].first);
             }
             size = _tmpPortion.size() + 1;
-            // for (std::pair<int, int> &a :_glb)
-            // {
-            //         std::cout << " [" << a.first << ", " << a.second << "] ";
-            // }
-            // std::cout << "\na :";
-            // for (size_t i = 0; i < _mainPortion.size(); i++)
-            // {
-            //         std::cout << " " << _mainPortion[i] << ", ";
-            // }
-            // std::cout << "\nb :";
-            // for (size_t i = 0; i < _tmpPortion.size(); i++)
-            // {
-            //         std::cout << " " << _tmpPortion[i] << ", ";
-            // }
+            for (std::pair<int, int> &a :_glb)
+            {
+                    std::cout << " [" << a.first << ", " << a.second << "] ";
+            }
+            std::cout << "\na :";
+            for (size_t i = 0; i < _mainPortion.size(); i++)
+            {
+                    std::cout << " " << _mainPortion[i] << ", ";
+            }
+            std::cout << "\nb :";
+            for (size_t i = 0; i < _tmpPortion.size(); i++)
+            {
+                    std::cout << " " << _tmpPortion[i] << ", ";
+            }
         }
 
         void makeJacobSeq()
@@ -105,14 +107,16 @@ class PmergeMe
 			while (true)
 			{
 					int jacobNum = Jacobsthal(index);
-					jacobSequence.push_back(jacobNum);
+					if ((size_t)jacobNum <= size)
+						jacobSequence.push_back(jacobNum);
 					for (int j = jacobNum - 1; j != lastJacob; j--)
 					{
-					jacobSequence.push_back(j);
-					if ((size_t)jacobSequence.back() == size)
-					{
-							break ;
-					}
+						if ((size_t)jacobNum <= size)
+							jacobSequence.push_back(j);
+						if ((size_t)jacobSequence.back() == size)
+						{
+								break ;
+						}
 					}
 					if (std::find(jacobSequence.begin(), jacobSequence.end(), size) != jacobSequence.end())
 							break ;
@@ -127,67 +131,65 @@ class PmergeMe
 			// std::cout << "\n";
         }
 
+        void binaryInert2(int target)
+		{
+			int end = _mainPortion.size() - 1;
+			int start = 0;
+			while (start <= end)
+			{
+				int mid = (start + end) / 2;
+				if (target <= _mainPortion[mid] && (!mid || target >= _mainPortion[mid - 1]))
+				{
+					_mainPortion.insert(_mainPortion.begin() + mid, target);
+					break ;
+				}
+				else if (target >= _mainPortion[mid] && (size_t)mid == _mainPortion.size() - 1)
+				{
+					_mainPortion.insert(_mainPortion.begin() + mid, target);
+					break ;
+				}
+				if (target < _mainPortion[mid])
+					end = mid - 1;
+				else if (target > _mainPortion[mid])
+					start = mid + 1;
+			}
+		}
+// int binary{
+//  int left = 0;
+//     int right = _data.size() - 1;
+
+//     while (left <= right) {
+//         int middle = (left + right) / 2;
+
+//         if (_data[middle] == target) {
+//             return middle;
+//         } else if (_data[middle] < target) {
+//             left = middle + 1;
+//         } else {
+//             right = middle - 1;
+//         }
+//     }
+
+//     return left;}
+
         void binaryInert()
 		{
 			size_t i = 0;
 		
-			while (i < jacobSequence.size() || odd != -1)
+			while (i < jacobSequence.size())
 			{
 				std::cout << odd;
-				int end = _mainPortion.size() - 1;
-				int start = end / 2;
-				if (jacobSequence[i] - 1 > (int)_tmpPortion.size())
-				{
-					i++;
-					continue ;
-				}
-				int target;
-				if (i < jacobSequence.size())
-					target = _tmpPortion[jacobSequence[i] - 2];
-				else if (odd != -1)
-				{
-					std::cout << "odd : " << odd << "\n";
-					target = odd;
-					odd = -1;
-				}
-				while (start < end)
-				{
-					std::cout << "a\n";
-					std::cout << "target : " << target << "; start : " << start << "; _mainPortion[start] : " << _mainPortion[start] << "; _mainPortion.size() : " << _mainPortion.size() << "; _mainPortion.back() : " << _mainPortion.back() << "\n";
-					// if (target > _mainPortion[start] && (size_t)(start + 1) == _mainPortion.size())
-					// {
-					// 	_mainPortion.insert(_mainPortion.begin() + start, {target});
-					// 	break ;
-					// }
-					if (target <= _mainPortion[start] && (!start && target >= _mainPortion[start - 1]))
-					{
-
-						_mainPortion.insert(_mainPortion.begin() + start, {target});
-						break ;
-					}
-					if (target >= _mainPortion[start] && ((size_t)(start + 1) < _mainPortion.size() && target <= _mainPortion[start + 1]))
-					{
-
-						_mainPortion.insert(_mainPortion.begin() + start + 1, {target});
-						break ;
-					}
-					if (target < _mainPortion[start])
-					{
-						end = start;
-						start /= 2;
-					}
-					else if (target > _mainPortion[start])
-					{
-						start = start + ((end - start) / 2);
-					}
-				}
+				// int end = _mainPortion.size() - 1;
+				// int start = end / 2;
+				int target = _tmpPortion[jacobSequence[i] - 2];
+				binaryInert2(target);
 				i++;
 			}
 
-			if (_mainPortion.front() == -1)
-			{
-				_mainPortion.erase(_mainPortion.begin());
-			}
+			// if (_mainPortion.front() == -1)
+			// {
+			// 	_mainPortion.erase(_mainPortion.begin());
+			// }
 			// std::cout << "\n a :";
 			// for (size_t i=0; i < _mainPortion.size(); i++)
 			// {
