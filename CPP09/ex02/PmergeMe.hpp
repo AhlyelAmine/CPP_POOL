@@ -26,12 +26,6 @@ class PmergeMe
     public:
 		T			_mainPortion;
 
-        // void read_input(int argc, char const *argv[]);
-        // void sortPairs();
-        // void fillContainers();
-        // void makeJacobSeq();
-        // void binaryInert();
-
         PmergeMe(){};
         ~PmergeMe(){};
 
@@ -59,7 +53,6 @@ class PmergeMe
 			}
 			if (pair.second == -1)
 				odd = pair.first;
-				// _glb.push_back(pair);
         }
 
         void sortPairs()
@@ -154,23 +147,6 @@ class PmergeMe
 					start = mid + 1;
 			}
 		}
-// int binary{
-//  int left = 0;
-//     int right = _data.size() - 1;
-
-//     while (left <= right) {
-//         int middle = (left + right) / 2;
-
-//         if (_data[middle] == target) {
-//             return middle;
-//         } else if (_data[middle] < target) {
-//             left = middle + 1;
-//         } else {
-//             right = middle - 1;
-//         }
-//     }
-
-//     return left;}
 
         void binaryInert()
 		{
@@ -179,23 +155,11 @@ class PmergeMe
 			while (i < jacobSequence.size())
 			{
 				std::cout << odd;
-				// int end = _mainPortion.size() - 1;
-				// int start = end / 2;
 				int target = _tmpPortion[jacobSequence[i] - 2];
 				binaryInert2(target);
 				i++;
 			}
 
-			// if (_mainPortion.front() == -1)
-			// {
-			// 	_mainPortion.erase(_mainPortion.begin());
-			// }
-			// std::cout << "\n a :";
-			// for (size_t i=0; i < _mainPortion.size(); i++)
-			// {
-			// 	std::cout << " " << _mainPortion[i] << ", ";
-			// }
-			// std::cout << "\n";
 		}
 };
 
